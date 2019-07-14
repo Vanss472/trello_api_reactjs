@@ -1,32 +1,38 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import axios from 'axios';
 import * as Constants from './constants';
+import Cards from './cards';
 
 class App extends Component {
-	state = {
-		boardLists: []
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+      boardLists: []
+    }
+  }
 
 	componentDidMount() {
-		const url = `${Constants.API_URL}/1/boards/${Constants.BOARD_ID}/lists/?fields=name,color,url&key=${Constants.API_KEY}&token=${Constants.API_TOKEN}`;
+		const url = `${Constants.API_URL}/1/lists/${Constants.LISTS_ID}/?fields=name&key=${Constants.API_KEY}&token=${Constants.API_TOKEN}`;
 		axios.get(url).then(response => response.data)
 		.then((data) => {
 			this.setState({ boardLists: data })
 			console.log(this.state.boardLists);
-		})
+    })
 	}
 
   render() {
 		return (
+      <Fragment>
 			<div className="row small-up-1 medium-up-2 large-up-3">
-				{this.state.boardLists.map((list) => (
-					<div className="column">
-						<div className="callout">
-							<h2>{list.name}</h2>
-						</div>
-					</div>
-				))}
+        <div className="column">
+          <h2>{this.state.boardLists.name}</h2>
+          <Cards />
+        </div>
+        <div className="column">
+          <h2>For Review</h2>
+        </div>
 			</div>
+      </Fragment>
 		);
 	}
 }
