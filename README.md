@@ -1,5 +1,10 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+### To Do
+- [ ] filter by label
+- [ ] show all cards on for review list
+- [ ] button functionality that when clicked moves the card to the "For Review" list
+
 ### Installation
 ```bash
 $ npm install
