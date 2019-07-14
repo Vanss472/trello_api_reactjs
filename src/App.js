@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import * as Constants from './constants';
 
 class App extends Component {
 	state = {
@@ -7,7 +8,7 @@ class App extends Component {
 	}
 
 	componentDidMount() {
-		const url = `${API_URL}/1/boards/${BOARD_ID}/lists/?fields=name,color,url&key=${API_KEY}&token=${API_TOKEN}`;
+		const url = `${Constants.API_URL}/1/boards/${Constants.BOARD_ID}/lists/?fields=name,color,url&key=${Constants.API_KEY}&token=${Constants.API_TOKEN}`;
 		axios.get(url).then(response => response.data)
 		.then((data) => {
 			this.setState({ boards: data })
