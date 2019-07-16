@@ -3,8 +3,17 @@ import axios from 'axios';
 import * as Constants from '../constants';
 
 class Cards extends Component {
-  state = {
-    cards: []
+  constructor(props) {
+    super(props);
+    this.state = {
+      cards: []
+    }
+
+    this.completedTask = this.completedTask.bind(this);
+  }
+
+  completedTask() {
+    console.log('clicked:', this);
   }
 
   componentDidMount() {
@@ -19,11 +28,16 @@ class Cards extends Component {
   render() {
     return (
       <div className="card">
-        {this.state.cards.map((card) => (
+        {this.state.cards.map((card, index) => (
           <div className="callout card-section" key={card.id}>
             {card.name}
             <span>{card.labels.name}</span>
-            <button type="button" className="success button">Complete</button>
+            <button
+              onClick={() => this.completedTask(index)}
+              type="button"
+              className="success button">
+                Complete
+            </button>
           </div>
         ))}
       </div>
