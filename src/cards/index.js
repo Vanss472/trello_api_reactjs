@@ -8,12 +8,6 @@ class Cards extends Component {
     this.state = {
       cards: []
     }
-
-    this.completedTask = this.completedTask.bind(this);
-  }
-
-  completedTask() {
-    console.log('clicked:', this);
   }
 
   componentDidMount() {
@@ -29,11 +23,11 @@ class Cards extends Component {
     return (
       <div className="card">
         {this.state.cards.map((card, index) => (
-          <div className="callout card-section" key={card.id}>
+          <div className="callout card-section" data-index={index} key={card.id}>
             {card.name}
             <span>{card.labels.name}</span>
             <button
-              onClick={() => this.completedTask(index)}
+              onClick={this.props.onClickHandler}
               type="button"
               className="success button">
                 Complete

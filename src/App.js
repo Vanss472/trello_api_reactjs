@@ -7,7 +7,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      boardLists: []
+      boardLists: [],
+      completed: false
     }
   }
 
@@ -18,7 +19,12 @@ class App extends Component {
 			this.setState({ boardLists: data })
 			console.log(this.state.boardLists);
     })
-	}
+  }
+
+  completedTask = () => {
+    console.log('clicked');
+    this.setState({ completed: true })
+  }
 
   render() {
 		return (
@@ -26,10 +32,15 @@ class App extends Component {
 			<div className="row small-up-1 medium-up-2 large-up-3">
         <div className="column">
           <h2>{this.state.boardLists.name}</h2>
-          <Cards />
+          <Cards onClickHandler={this.completedTask} />
         </div>
         <div className="column">
           <h2>For Review</h2>
+
+          {
+            this.state.completed ?
+            <Cards /> : null
+          }
         </div>
 			</div>
       </Fragment>
