@@ -17,7 +17,7 @@ class App extends Component {
 		axios.get(url).then(response => response.data)
 		.then((data) => {
 			this.setState({ boardLists: data })
-			console.log(this.state.boardLists);
+			console.log(data);
     })
   }
 

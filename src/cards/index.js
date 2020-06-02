@@ -15,7 +15,7 @@ class Cards extends Component {
     axios.get(url).then(response => response.data)
     .then((data) => {
       this.setState({ cards: data })
-      console.log(this.state.cards);
+      console.log(data);
     })
   }
 
@@ -27,6 +27,7 @@ class Cards extends Component {
             {card.name}
             <span>{card.labels.name}</span>
             <button
+              id={card.id}
               onClick={this.props.onClickHandler}
               type="button"
               className="success button">
