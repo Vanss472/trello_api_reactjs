@@ -6,7 +6,8 @@ class Cards extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cards: []
+      cards: [],
+      completed: false
     }
   }
 
@@ -15,8 +16,33 @@ class Cards extends Component {
     axios.get(url).then(response => response.data)
     .then((data) => {
       this.setState({ cards: data })
+      // this.setState({ cards: data.map(card => {
+      //   const completed = card.completed = false
+      //   const updatedCard = {...card, completed}
+      //     return updatedCard
+      //   })
+      // })
       console.log(data);
     })
+  }
+
+  onClickHandler = (id) => {
+    return () => {
+      console.log(id);
+      console.log('clicked');
+      // console.log(this.state.cards);
+      // this.state.cards.map(card => {
+      //   if (card.id === id) {
+      //     // console.log(card.id);
+      //     // console.log(id);
+      //     return this.setState(prevState => ({
+      //       completed: true
+      //     }))
+      //   } else {
+      //     return card
+      //   }
+      // })
+    }
   }
 
   render() {
@@ -28,9 +54,9 @@ class Cards extends Component {
             <span>{card.labels.name}</span>
             <button
               id={card.id}
-              onClick={this.props.onClickHandler}
+              onClick={this.onClickHandler(card.id)}
               type="button"
-              className="success button">
+              className={`button ${this.state.completed ? `success` : null}`}>
                 Complete
             </button>
           </div>
